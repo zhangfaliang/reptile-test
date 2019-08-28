@@ -1,0 +1,35 @@
+{
+  "name": "reptile-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "browserslist": "> 0.25%, not dead",
+  "targets": {
+    "chrome": "58",
+    "ie": "11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangfaliang/reptile-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhangfaliang/reptile-test/issues"
+  },
+  "homepage": "https://github.com/zhangfaliang/reptile-test#readme",
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "cheerio": "^1.0.0-rc.3",
+    "core-js": "3",
+    "koa": "^2.8.1",
+    "superagent": "^5.1.0"
+  }
+}
