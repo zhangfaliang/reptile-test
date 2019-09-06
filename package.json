@@ -30,6 +30,8 @@
     "cheerio": "^1.0.0-rc.3",
     "core-js": "3",
     "koa": "^2.8.1",
+    "koa-router": "^7.4.0",
+    "lodash": "^4.17.15",
     "superagent": "^5.1.0"
   }
 }
