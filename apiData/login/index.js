@@ -6,16 +6,17 @@ const indexRoute = ({ query, router, app }) => {
   router.post("/common/login", async ctx => {
     const res = await query("select * from user");
     //isSomeoneUser()
-    ctx.body = JSON.stringify(ctx);
     let postData = ctx.request.body;
-    console.log(ctx.req, postData);
-  });
-  router.post("/common/sign", async ctx => {
-    const res = await query("select * from user");
+    ctx.body = JSON.stringify(postData);
+
     console.log(res);
-    ctx.body = res;
   });
-  server.use(async (ctx, next) => {
+  router.post("/common/signin", async ctx => {
+    const res = await query("select * from user");
+    let postData = ctx.request.body;
+    ctx.body = JSON.stringify(postData);
+  });
+  app.use(async (ctx, next) => {
     ctx.res.statusCode = 200;
     await next();
   });
