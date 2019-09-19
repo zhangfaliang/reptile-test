@@ -15,6 +15,7 @@ const indexRoute = ({ query, router, app }) => {
     const res = await query("select * from user");
     let postData = ctx.request.body;
     ctx.body = JSON.stringify(postData);
+    console.log(postData)
   });
   app.use(async (ctx, next) => {
     ctx.res.statusCode = 200;
