@@ -1,4 +1,4 @@
-const { get } = require("lodash");
+const { get, isEmpty } = require("lodash");
 const indexRoute = ({ query, router, app }) => {
   const isSomeoneUser = ({ user_name, res }) => {
     return res.some(item => get(item.user_name) === user_name);
@@ -8,14 +8,20 @@ const indexRoute = ({ query, router, app }) => {
     //isSomeoneUser()
     let postData = ctx.request.body;
     ctx.body = JSON.stringify(postData);
-
-    console.log(res);
   });
   router.post("/common/signin", async ctx => {
-    const res = await query("select * from user");
     let postData = ctx.request.body;
+    const { userName, password } = postData;
+    const resArr = await query(
+      `select * from user where user_name=${userName}`
+    );
+    if (isEmpty(resArr)) {
+      const res = await query(
+        `inset  into  user(user_name,user_password) values(${userName},${password});`
+      );
+      console.log(res);
+    }
     ctx.body = JSON.stringify(postData);
-    console.log(postData)
   });
   app.use(async (ctx, next) => {
     ctx.res.statusCode = 200;
