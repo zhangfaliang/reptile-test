@@ -1,6 +1,12 @@
 const loginRoute = require("./login/index.js");
 
-const combintionRouter = ({ query, router, server, app, handle, ssrCache }) => {
-  loginRoute({ query, router, server, app, handle, ssrCache });
+const combintionRouter = ({
+  query,
+  router,
+  app,
+  baseSucessRquest,
+  baseErrorRquest
+}) => {
+  loginRoute({ query, router, app, baseSucessRquest, baseErrorRquest });
 };
 module.exports = combintionRouter;
