@@ -1,4 +1,5 @@
 const { get, isEmpty } = require("lodash");
+
 const indexRoute = ({
   query,
   router,
@@ -6,9 +7,6 @@ const indexRoute = ({
   baseSucessRquest,
   baseErrorRquest
 }) => {
-  const isSomeoneUser = ({ user_name, res }) => {
-    return res.some(item => get(item.user_name) === user_name);
-  };
   router.post("/common/login", async ctx => {
     try {
       let postData = ctx.request.body;
@@ -25,6 +23,7 @@ const indexRoute = ({
           }
         });
       } else {
+        ctx.session.userId = userName;
         ctx.body = JSON.stringify({
           ...baseSucessRquest,
           data: { msg: "成功登陆", verify: true }
@@ -36,9 +35,8 @@ const indexRoute = ({
         data: { message: "服务器未知错误", verify: false }
       });
     }
-
-    ctx.body = JSON.stringify(postData);
   });
+
   router.post("/common/signin", async ctx => {
     try {
       let postData = ctx.request.body;
@@ -64,6 +62,43 @@ const indexRoute = ({
         });
       }
     } catch (e) {
+      ctx.body = JSON.stringify({
+        ...baseErrorRquest,
+        data: { message: "服务器未知错误", verify: false }
+      });
+    }
+  });
+
+  router.post("/common/changepwd", async ctx => {
+    try {
+      let postData = ctx.request.body;
+      const { userName, password, newPassword, newPasswordAgin } = postData;
+      console.log(postData,  `select * from user where user_name=${userName}`, "------");
+
+      const resArr = await query(
+        `select * from user where user_name=${userName}`
+      );
+      ///and user_password=${password}
+      console.log(resArr, "------");
+      if (!isEmpty(resArr)) {
+        // const res = await query(
+        //   `UPDATE user SET field2=new-value2;`
+        // );
+        ctx.body = JSON.stringify({
+          ...baseSucessRquest,
+          data: {
+            msg: "修改成功",
+            verify: true
+          }
+        });
+      } else {
+        ctx.body = JSON.stringify({
+          ...baseSucessRquest,
+          data: { msg: "用户名或者密码错误", verify: false }
+        });
+      }
+    } catch (e) {
+      console.log(e);
       ctx.body = JSON.stringify({
         ...baseErrorRquest,
         data: { message: "服务器未知错误", verify: false }

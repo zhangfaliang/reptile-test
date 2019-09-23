@@ -32,6 +32,7 @@
     "koa": "^2.8.1",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "koa-session": "^5.12.3",
     "lodash": "^4.17.15",
     "mysql": "^2.17.1",
     "superagent": "^5.1.0"
