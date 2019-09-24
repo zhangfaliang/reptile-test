@@ -1,4 +1,5 @@
 const { get, isEmpty } = require("lodash");
+const sjcl = require("../../utils/sjcl");
 
 const indexRoute = ({
   query,
@@ -12,8 +13,12 @@ const indexRoute = ({
       let postData = ctx.request.body;
       const { userName, password } = postData;
       const resArr = await query(
-        `select * from user where user_name=${userName} and user_password=${password}`
+        `select * from user where user_name=${userName}`
       );
+      const user_password = `"${get(resArr, "0.user_password")}"`;
+      console.log(password, "-------", user_password);
+      // console.log(sjcl.decrypt("password", user_password))
+      // console.log(sjcl.decrypt("password", user_password));
       if (isEmpty(resArr)) {
         ctx.body = JSON.stringify({
           ...baseSucessRquest,
@@ -30,6 +35,7 @@ const indexRoute = ({
         });
       }
     } catch (e) {
+      console.log(e);
       ctx.body = JSON.stringify({
         ...baseErrorRquest,
         data: { message: "服务器未知错误", verify: false }
@@ -73,7 +79,11 @@ const indexRoute = ({
     try {
       let postData = ctx.request.body;
       const { userName, password, newPassword, newPasswordAgin } = postData;
-      console.log(postData,  `select * from user where user_name=${userName}`, "------");
+      console.log(
+        postData,
+        `select * from user where user_name=${userName}`,
+        "------"
+      );
 
       const resArr = await query(
         `select * from user where user_name=${userName}`
