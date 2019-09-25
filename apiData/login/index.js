@@ -9,6 +9,7 @@ const indexRoute = ({
   baseErrorRquest
 }) => {
   router.post("/common/login", async ctx => {
+    console.log(ctx.session,'-----',this)
     try {
       let postData = ctx.request.body,
         data = {};
