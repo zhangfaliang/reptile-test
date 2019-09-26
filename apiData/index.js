@@ -1,7 +1,8 @@
 const {
   changePwdRouter,
   loginRouter,
-  signRouter
+  signRouter,
+  userInfoRoute
 } = require("./user/index.js");
 
 const combintionRouter = ({
@@ -14,5 +15,6 @@ const combintionRouter = ({
   changePwdRouter({ query, router, app, baseSucessRquest, baseErrorRquest });
   loginRouter({ query, router, app, baseSucessRquest, baseErrorRquest });
   signRouter({ query, router, app, baseSucessRquest, baseErrorRquest });
+  userInfoRoute({ query, router, app, baseSucessRquest, baseErrorRquest });
 };
 module.exports = combintionRouter;
