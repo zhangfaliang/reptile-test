@@ -35,6 +35,12 @@ const signRoute = ({
       });
     }
   });
+  router.get("/common/test", async ctx => {
+    ctx.body = JSON.stringify({
+      ...baseErrorRquest,
+      data: { message: "服务器未知错误", verify: false }
+    });
+  });
 
   app.use(async (ctx, next) => {
     ctx.res.statusCode = 200;

@@ -1,4 +1,4 @@
-const { get, isEmpty } = require("lodash");
+const { get } = require("lodash");
 
 const userInfoRoute = ({
   query,
@@ -27,7 +27,7 @@ const userInfoRoute = ({
         data = {
           msg: "ok",
           verify: true,
-          userInfo: { balance, user_name, is_vip }
+          userInfo: { balance, userName: user_name, isVip: is_vip }
         };
       }
       ctx.body = JSON.stringify({
