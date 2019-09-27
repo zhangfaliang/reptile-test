@@ -10,7 +10,6 @@ const userInfoRoute = ({
   router.post("/common/userInfo", async ctx => {
     try {
       const { _expire, userId } = get(ctx, "session", {});
-      console.log(ctx.session)
       let data = {
         msg: "用户未登录",
         verify: false
@@ -19,6 +18,8 @@ const userInfoRoute = ({
         `select s1.expire, u1.balance, u1.user_name, u1.is_vip from session_store s1 left join user u1 on u1.user_id=s1.user_id where u1.user_name=${userId}`
       );
       const resExpire = get(resArr, "0.expire");
+      console.log( parseInt(resExpire) , parseInt(_expire) ,
+      new Date().getTime() < _expire)
       if (
         parseInt(resExpire) === parseInt(_expire) &&
         new Date().getTime() < _expire
