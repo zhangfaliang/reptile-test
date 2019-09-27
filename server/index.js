@@ -9,6 +9,7 @@ const query = require("../connect/index");
 const apiRouter = require("../apiData/index");
 const { baseSucessRquest, baseErrorRquest } = require("../utils/common");
 const { setSession } = require("../session/index");
+const { _cors, main } = require("../_cors/index");
 const router = new Router();
 const app = new Koa();
 const port = 5000;
@@ -23,4 +24,6 @@ apiRouter({
 });
 app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
+// app.use(_cors);
+// app.use(main);
 app.listen(port);

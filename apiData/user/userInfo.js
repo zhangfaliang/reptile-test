@@ -10,6 +10,7 @@ const userInfoRoute = ({
   router.post("/common/userInfo", async ctx => {
     try {
       const { _expire, userId } = get(ctx, "session", {});
+      console.log(_expire)
       let data = {
         msg: "用户未登录",
         verify: false
