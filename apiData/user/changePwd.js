@@ -33,7 +33,7 @@ const changePWDRoute = ({
     } catch (e) {
       ctx.body = JSON.stringify({
         ...baseErrorRquest,
-        data: { message: "服务器未知错误", verify: false }
+        data: { msg: "服务器未知错误", verify: false }
       });
     }
   });

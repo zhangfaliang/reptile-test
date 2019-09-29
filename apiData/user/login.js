@@ -9,6 +9,8 @@ const loginRoute = ({
   baseErrorRquest
 }) => {
   const processSession = async ({ user_id, sessionId, expire }) => {
+    console.log(user_id, sessionId, expire, "-----");
+
     try {
       const sessionArr = await query(
         `select * from session_store where user_id=${user_id}`
@@ -45,12 +47,12 @@ const loginRoute = ({
         );
         const resPwd = sjcl.decrypt("password", password);
         if (resPwd === user_password) {
-          ctx.session.userId = userName;
+          ctx.session.sessionId = userName;
           // 登录处理session
           processSession({
             user_id: get(resArr, "0.user_id"),
             sessionId: userName,
-            expire: get(ctx.session, "_expire")
+            expire: new Date().getTime()
           });
           data = { msg: "成功登陆", verify: true };
         }
@@ -62,7 +64,7 @@ const loginRoute = ({
     } catch (e) {
       ctx.body = JSON.stringify({
         ...baseErrorRquest,
-        data: { message: "服务器未知错误", verify: false }
+        data: { msg: "服务器未知错误", verify: false }
       });
     }
   });

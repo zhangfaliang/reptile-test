@@ -9,18 +9,20 @@ const logoutRoute = ({
 }) => {
   router.post("/common/logout", async ctx => {
     try {
-      const { userId } = get(ctx, "session");
-      await query(`delete  from session_store where user_id=${userId}`);
-      ctx.session.userId = "";
+      const { sessionId } = get(ctx, "session");
+      const res = await query(
+        `delete  from session_store where sessionId=${sessionId}`
+      );
+      ctx.session.sessionId = "";
       ctx.body = JSON.stringify({
         ...baseSucessRquest,
-        data: { message: "已退出", verify: true }
+        data: { msg: "已退出", verify: true }
       });
     } catch (e) {
-        console.log(e)
+      console.log(e);
       ctx.body = JSON.stringify({
         ...baseErrorRquest,
-        data: { message: "服务器未知错误", verify: false }
+        data: { msg: "服务器未知错误", verify: false }
       });
     }
   });
