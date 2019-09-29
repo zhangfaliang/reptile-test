@@ -6,6 +6,8 @@ const {
   logoutRoute
 } = require("./user/index.js");
 
+const { pageIndexConfigRoute } = require("./config/index.js");
+
 const combintionRouter = ({
   query,
   router,
@@ -18,5 +20,12 @@ const combintionRouter = ({
   signRouter({ query, router, app, baseSucessRquest, baseErrorRquest });
   userInfoRoute({ query, router, app, baseSucessRquest, baseErrorRquest });
   logoutRoute({ query, router, app, baseSucessRquest, baseErrorRquest });
+  pageIndexConfigRoute({
+    query,
+    router,
+    app,
+    baseSucessRquest,
+    baseErrorRquest
+  });
 };
 module.exports = combintionRouter;
