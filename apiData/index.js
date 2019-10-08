@@ -5,6 +5,7 @@ const {
   userInfoRoute,
   logoutRoute
 } = require("./user/index.js");
+const reChargeRoute = require("./payment/standard.js");
 
 const { pageIndexConfigRoute } = require("./config/index.js");
 
@@ -27,5 +28,6 @@ const combintionRouter = ({
     baseSucessRquest,
     baseErrorRquest
   });
+  reChargeRoute({ query, router, app, baseSucessRquest, baseErrorRquest });
 };
 module.exports = combintionRouter;
