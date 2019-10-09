@@ -5,7 +5,7 @@ const {
   userInfoRoute,
   logoutRoute
 } = require("./user/index.js");
-const { customRouter, standardRouter } = require("./payment/index.js");
+const { customRouter, standardRouter, queryRoute } = require("./payment/index.js");
 
 const { pageIndexConfigRoute } = require("./config/index.js");
 
@@ -30,5 +30,6 @@ const combintionRouter = ({
   });
   standardRouter({ query, router, app, baseSucessRquest, baseErrorRquest });
   customRouter({ query, router, app, baseSucessRquest, baseErrorRquest });
+  queryRoute({ query, router, app, baseSucessRquest, baseErrorRquest });
 };
 module.exports = combintionRouter;

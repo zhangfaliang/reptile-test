@@ -25,28 +25,6 @@ const customRoute = ({
         },
         data: payFormData
       });
-      const {
-        payurl,
-        payimg,
-        amount,
-        realamount,
-        greenpay_id,
-        ordernum,
-        queryurl,
-        type,
-        key,
-        timeout
-      } = get(data, "data");
-      //   const data = await axios({
-      //     url: `${hostName}/api/index/query`,
-      //     method: "post",
-      //     headers: {
-      //       "content-type": "application/x-www-form-urlencoded"
-      //     },
-      //     data: {
-      //       greenpay_id: "001"
-      //     }
-      //   });
       ctx.body = JSON.stringify({
         ...baseSucessRquest,
         data: get(data, "data.content")
