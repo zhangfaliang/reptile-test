@@ -2,6 +2,7 @@ const { get, isEmpty } = require("lodash");
 const request = require("request");
 const axios = require("axios");
 const { getOrderInfo, getFormData } = require("../../utils/payment");
+const moment = require("moment");
 
 const customRoute = ({
   query,
@@ -25,6 +26,20 @@ const customRoute = ({
         },
         data: payFormData
       });
+      const { sessionId } = get(ctx, "session", {});
+      const { amount, greenpay_id, type } = get(data, "data.content");
+      const resArr = await query(
+        `select * from user where user_name='${sessionId}';`
+      );
+      if (!isEmpty(resArr)) {
+        const { user_id } = get(resArr, "0");
+        await query(
+          `insert  into  payOrder(greenpayId,goodId,userId,amount,paymentType,payData,orderType)
+               values('${greenpay_id}','${goodId}','${user_id}',${amount *
+            100},'${type}','${moment().format("l")}',0);`
+        );
+      }
+
       ctx.body = JSON.stringify({
         ...baseSucessRquest,
         data: get(data, "data.content")
