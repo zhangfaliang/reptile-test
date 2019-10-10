@@ -34,9 +34,8 @@ const customRoute = ({
       if (!isEmpty(resArr)) {
         const { user_id } = get(resArr, "0");
         await query(
-          `insert  into  payOrder(greenpayId,goodId,userId,amount,paymentType,payData,orderType)
-               values('${greenpay_id}','${goodId}','${user_id}',${amount *
-            100},'${type}','${moment().format("l")}',0);`
+          `insert  into  payOrder(greenpayId,goodId,userId,amount,paymentType,payData,orderType)values('${greenpay_id}','${goodId}','${user_id}',${amount *
+          100},'${type}','${moment().format("YYYY/MM/DD hh:mm:ss")}',0);`
         );
       }
 

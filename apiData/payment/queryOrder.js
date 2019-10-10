@@ -16,16 +16,13 @@ const queryRoute = ({
       );
       if (!isEmpty(orderRes)) {
         const resArr = await query(
-          `update payOrder set orderType=${orderType} payData='${moment().format(
-            "l"
-          )}' where greenpayId='${greenpay_id}';`
+          `update payOrder set orderType=${orderType}, payData='${moment().format("YYYY/MM/DD hh:mm:ss")}' where greenpayId='${greenpay_id}';`
         );
       }
     };
     const hostName = "https://www.greenyep.com/api";
     try {
-      let { greenpay_id, goodId, amount, payType } = ctx.request.body;
-      const { sessionId } = get(ctx, "session", {});
+      let { greenpay_id } = ctx.request.body;
       const data = await axios({
         url: `${hostName}/api/index/query?greenpay_id=${greenpay_id}`,
         method: "get"
