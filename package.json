@@ -32,6 +32,7 @@
     "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
     "core-js": "3",
+    "js-base64": "^2.5.1",
     "koa": "^2.8.1",
     "koa-bodyparser": "^4.2.1",
     "koa-mysql-session": "^0.0.2",
@@ -43,6 +44,10 @@
     "moment": "^2.24.0",
     "mysql": "^2.17.1",
     "puppeteer": "^1.20.0",
-    "request": "^2.88.0"
+    "puppeteer-chromium-resolver": "^2.0.1",
+    "puppeteer-core": "^1.20.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "superagent": "^5.1.0"
   }
 }
